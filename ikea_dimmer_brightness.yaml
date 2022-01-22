@@ -1,0 +1,39 @@
+---
+blueprint:
+  name: Ikea dimmer brightness of light
+  description: Turns a light on or off from an IKEA dimmer
+  domain: automation
+  input:
+    button:
+      name: Dimmer
+      description: This dimmer will dimmer the lights accordig to the brightness of this sensor
+      selector:
+        entity:
+          domain: sensor
+    target_light:
+      name: Lights
+      description: The lights to be dimmered
+      selector:
+        entity:
+          domain: light
+
+trigger:
+  - platform: state
+    entity_id: !input 'button'
+condition:
+  - condition: and
+    conditions:
+      - condition: state
+        state: 'on'
+        entity_id: !input 'target_light'
+      - condition: numeric_state
+        entity_id: !input 'button'
+        above: '0'
+action:
+  - service: light.turn_on
+    data:
+      brightness: |
+        {{ trigger.to_state.state }}
+    target:
+      entity_id: !input 'target_light'
+mode: single
