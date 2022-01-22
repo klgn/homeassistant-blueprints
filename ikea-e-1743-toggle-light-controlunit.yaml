@@ -28,28 +28,28 @@ description: ''
 trigger:
   - platform: device
     domain: mqtt
-    device_id: !input remote
+    device_id: !input dimmer
     type: click
     subtype: 'on'
     discovery_id: 0x680ae2fffebea32b click_on
     id: click-on
   - platform: device
     domain: mqtt
-    device_id: !input remote
+    device_id: !input dimmer
     type: action
     subtype: 'off'
     discovery_id: 0x680ae2fffebea32b action_off
     id: click-off
   - platform: device
     domain: mqtt
-    device_id: !input remote
+    device_id: !input dimmer
     type: action
     subtype: brightness_move_up
     discovery_id: 0x680ae2fffebea32b action_brightness_move_up
     id: click-brightness-up
   - platform: device
     domain: mqtt
-    device_id: !input remote
+    device_id: !input dimmer
     type: action
     subtype: brightness_move_down
     discovery_id: 0x680ae2fffebea32b action_brightness_move_down
