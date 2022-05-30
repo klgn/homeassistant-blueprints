@@ -10,7 +10,6 @@ blueprint:
       selector:
         entity:
           domain: sensor
-          integration: RenoWeb Garbage Collection
     mobile_app_device:
       name: Mobile App device
       description: (Optional) Android, iphone, mac. Anything with the companion app
