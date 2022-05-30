@@ -1,0 +1,40 @@
+---
+blueprint:
+  name: Notification when waste is being collected
+  description: When the selected sensor from renoweb hits 0 a notification is sent to the chosen device(s)
+  domain: automation
+  input:
+    waste:
+      name: Waste
+      description: The waste sensor from renoweb
+      selector:
+        entity:
+          domain: sensor
+          integration: RenoWeb Garbage Collection
+    mobile_app_device:
+      name: Mobile App device
+      description: (Optional) Android, iphone, mac. Anything with the companion app
+      default: ''
+      selector:
+        device:
+          integration: mobile_app
+trigger:
+  - platform: state
+    entity_id: !input 'waste'
+    id: waste-collected
+    from: '1'
+    to: '0'
+
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: waste-collected
+        sequence:
+          device_id: !mobile_app_device
+          domain: mobile_app
+          type: notify
+          title: Waste is collected today
+          message: >-
+            {{ state_attr(entity_id, 'friendly_name') }} is being collected today
+mode: single
