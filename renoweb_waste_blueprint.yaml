@@ -31,7 +31,7 @@ action:
           - condition: trigger
             id: waste-collected
         sequence:
-          device_id: !mobile_app_device
+          device_id: !input mobile_app_device
           domain: mobile_app
           type: notify
           title: Waste is collected today
