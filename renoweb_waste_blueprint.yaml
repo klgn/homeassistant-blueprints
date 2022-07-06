@@ -19,7 +19,7 @@ blueprint:
           integration: mobile_app
 trigger:
   - platform: state
-    entity_id: !input 'waste'
+    entity_id: !input waste
     id: waste-collected
     from: '1'
     to: '0'
@@ -35,5 +35,5 @@ action:
           type: notify
           title: Waste is collected today
           message: >-
-            {{ state_attr(entity_id, 'friendly_name') }} is being collected today
+            {{ state_attr(!input waste, 'friendly_name') }} is being collected today
 mode: single
